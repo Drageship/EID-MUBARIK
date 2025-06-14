@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Sadiq Memorial School - Attendance</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #a18cd1, #fbc2eb);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    header {
+      background: #673ab7;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 20px;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    #adminIcon {
+      font-size: 22px;
+      background: white;
+      color: #673ab7;
+      padding: 6px 12px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    main {
+      padding: 60px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    form h2 {
+      margin-bottom: 20px;
+      color: #4a148c;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-bottom: 2px solid #ccc;
+      margin-top: 20px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-bottom: 2px solid #7b1fa2;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 30px;
+      background: linear-gradient(to right, #7b1fa2, #512da8);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #512da8, #7b1fa2);
+      transform: scale(1.03);
+    }
+
+    #adminPanel {
+      display: none;
+      margin-top: 30px;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-width: 95%;
+      width: 900px;
+    }
+
+    #adminPanel h2 {
+      text-align: center;
+      color: #4a148c;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background: #ede7f6;
+      color: #311b92;
+    }
+
+    #downloadBtn {
+      background: #00bcd4;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+      display: block;
+      margin-left: auto;
+    }
+
+    #downloadBtn:hover {
+      background: #0097a7;
+    }
+
+    /* Animated 3D Icons BG */
+    .floating-icon {
+      position: absolute;
+      width: 60px;
+      animation: float 10s infinite ease-in-out;
+      opacity: 0.3;
+    }
+
+    .icon1 { top: 10%; left: 5%; animation-delay: 0s; }
+    .icon2 { top: 20%; right: 10%; animation-delay: 2s; }
+    .icon3 { bottom: 10%; left: 15%; animation-delay: 4s; }
+    .icon4 { bottom: 20%; right: 5%; animation-delay: 6s; }
+    .icon5 { top: 35%; left: 45%; animation-delay: 8s; }
+
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(20deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+
+    @media (max-width: 600px) {
+      form, #adminPanel {
+        width: 90%;
+        padding: 20px;
+      }
+      header h1 { font-size: 16px; }
+      header img { height: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/School_icon.svg/1024px-School_icon.svg.png" alt="Logo">
+    <h1>The Sadiq Memorial School</h1>
+    <div id="adminIcon" title="Open Admin">🔐</div>
+  </header>
+
+  <!-- Floating Icons -->
+  <img class="floating-icon icon1" src="https://cdn-icons-png.flaticon.com/512/2995/2995786.png">
+  <img class="floating-icon icon2" src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png">
+  <img class="floating-icon icon3" src="https://cdn-icons-png.flaticon.com/512/3103/3103759.png">
+  <img class="floating-icon icon4" src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png">
+  <img class="floating-icon icon5" src="https://cdn-icons-png.flaticon.com/512/2972/2972232.png">
+
+  <main>
+    <form id="attendanceForm">
+      <h2>📌 استاد کی حاضری درج کریں</h2>
+      <input type="text" id="teacherName" placeholder="استاد کا نام لکھیں" required>
+      <button type="submit">✅ حاضری محفوظ کریں</button>
+    </form>
+
+    <div id="adminPanel">
+      <h2>📋 تمام حاضری ریکارڈز</h2>
+      <table id="attendanceTable">
+        <thead>
+          <tr>
+            <th>👨‍🏫 Teacher Name</th>
+            <th>📅 Date</th>
+            <th>⏰ Time</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <button id="downloadBtn">⬇️ CSV ڈاؤنلوڈ کریں</button>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('attendanceForm');
+    const teacherInput = document.getElementById('teacherName');
+    const tableBody = document.querySelector('#attendanceTable tbody');
+    const adminPanel = document.getElementById('adminPanel');
+    const adminIcon = document.getElementById('adminIcon');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    const saveAttendance = (name, date, time) => {
+      const data = JSON.parse(localStorage.getItem('attendanceData') || '[]');
+      data.push({ name, date, time });
+      localStorage.setItem('attendanceData', JSON.stringify(data));
+    };
+
+    const renderTable = () => {
+      tableBody.innerHTML = '';
+      const data = JSON.parse(localStorage.getItem('attendanceData') || '[]');
+      data.forEach(entry => {
+        const row = `<tr>
+          <td>${entry.name}</td>
+          <td>${entry.date}</td>
+          <td>${entry.time}</td>
+        </tr>`;
+        tableBody.innerHTML += row;
+      });
+    };
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = teacherInput.value.trim();
+      if (name) {
+        const now = new Date();
+        const date = now.toLocaleDateString();
+        const time = now.toLocaleTimeString();
+        saveAttendance(name, date, time);
+        teacherInput.value = '';
+        alert('✅ Attendance saved!');
+      }
+    });
+
+    adminIcon.addEventListener('click', () => {
+      adminPanel.style.display = adminPanel.style.display === 'none' ? 'block' : 'none';
+      renderTable();
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      const data = JSON.parse(localStorage.getItem('attendanceData') || '[]');
+      let csvContent = "Teacher Name,Date,Time\n";
+      data.forEach(row => {
+        csvContent += `${row.name},${row.date},${row.time}\n`;
+      });
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "attendance_records.csv";
+      link.click();
+    });
+  </script>
+</body>
+</html>
